@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Zay Shop</title>
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+
+    <style>
+        /* Estilos base de la plantilla Zay Shop */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #495057; /* Texto ligeramente más oscuro para mejor contraste */
+            background-color: #f8f9fa; /* Fondo general muy claro */
+        }
+
+        .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: 'Roboto', sans-serif;
+            color: #212529;
+        }
+
+        .text-success {
+            color: #28a745 !important; /* Un verde más estándar y reconocible */
+        }
+
+        /* Overrides para colores */
+        .bg-light {
+            background-color: #e9ecef !important; /* Un gris claro más suave */
+        }
+        .bg-white-pure {
+            background-color: #ffffff !important;
+        }
+
+        /* Botones */
+        .btn-success {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+            color: #fff !important;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-success:hover {
+            background-color: #218838 !important;
+            border-color: #1e7e34 !important;
+            box-shadow: 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: #fff;
+            box-shadow: 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d !important;
+            border-color: #6c757d !important;
+            color: #fff !important;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268 !important;
+            border-color: #545b62 !important;
+        }
+
+        .btn-danger {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            color: #fff !important;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-danger:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        /* Barra de navegación superior */
+        #templatemo_nav_top {
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #eee;
+            padding: 0.5rem 0;
+        }
+        #templatemo_nav_top .text-light {
+            color: #777 !important;
+        }
+        #templatemo_nav_top .text-light:hover {
+            color: #28a745 !important;
+        }
+
+        /* Barra de navegación principal */
+        .navbar.shadow {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        /* Ajuste para el logo de Zay */
+        .navbar-brand.text-success.logo {
+            font-size: 2.5rem !important; /* Un poco más grande para destacar */
+            font-weight: 800; /* Más robusto */
+            letter-spacing: -1px; /* Espaciado entre letras para un look pulcro */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto; /* Centrar en la barra de navegación */
+            padding-right: 0; /* Eliminar padding extra si lo hubiera */
+        }
+        .navbar-brand.text-success.logo span {
+            color: #28a745; /* Asegura el color verde */
+            margin-right: 5px; /* Pequeño espacio si se añade un ícono o algo */
+        }
+
+        /* Ajuste para los elementos de navegación para que el logo tenga espacio */
+        .navbar-light .navbar-nav .nav-link {
+            color: #495057;
+            transition: color 0.2s ease-in-out;
+        }
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #28a745;
+        }
+        /* Para ajustar el padding y centrado de los elementos nav */
+        .navbar-nav {
+            flex-grow: 1; /* Permitir que ocupe el espacio disponible */
+            justify-content: center; /* Centrar los elementos de navegación */
+        }
+
+
+        /* Modal de búsqueda */
+        .modal.bg-white {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .modal-content.border-0 {
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .input-group-text.bg-success {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+        }
+
+        /* Estilos específicos del carrito de compras */
+        .container.py-5 {
+            padding-top: 4rem !important;
+            padding-bottom: 4rem !important;
+        }
+
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 0.75rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+            background-color: #fff;
+        }
+
+        .card-body {
+            padding: 2.5rem;
+        }
+
+        .cart-section-title {
+            color: #28a745;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Tabla de productos */
+        .table {
+            margin-bottom: 2rem;
+        }
+
+        .table thead th {
+            background-color: #f8f9fa;
+            color: #555;
+            border-bottom: 2px solid #dee2e6;
+            padding: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .table tbody td {
+            padding: 1.2rem 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #eee;
+        }
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cart-item {
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            border: 1px solid #ddd;
+            margin-right: 1rem;
+        }
+
+        /* Controles de cantidad */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-control button {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            color: #495057;
+            transition: all 0.2s ease-in-out;
+        }
+        .quantity-control button:hover {
+            background-color: #e9ecef;
+            border-color: #adadad;
+        }
+
+        .quantity-control .form-control {
+            width: 60px;
+            text-align: center;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .item-price, .item-subtotal {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .remove-item {
+            background-color: transparent !important;
+            border: none !important;
+            color: #dc3545 !important;
+            font-size: 1.2rem;
+            cursor: pointer;
+            outline: none;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .remove-item:hover {
+            opacity: 0.8;
+        }
+
+        /* Resumen del carrito */
+        .cart-summary .list-group-item {
+            background-color: #fff;
+            border: none;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+        .cart-summary .list-group-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .cart-summary .list-group-item span {
+            font-weight: 500;
+            color: #333;
+        }
+        .cart-summary .list-group-item.fs-4 {
+            font-size: 1.25rem !important;
+            font-weight: 700;
+            color: #28a745 !important;
+            padding-top: 1.5rem;
+        }
+
+        .d-grid.gap-2 {
+            margin-top: 2rem !important;
+        }
+
+        .btn-lg {
+            padding: 0.8rem 1.75rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+        }
+
+        /* Pie de página */
+        footer#tempaltemo_footer {
+            background-color: #f8f9fa !important;
+            border-top: 1px solid #eee;
+            color: #6c757d;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        footer#tempaltemo_footer h2 {
+            color: #28a745;
+            border-color: #28a745 !important;
+            margin-bottom: 1.5rem;
+        }
+        footer#tempaltemo_footer .list-unstyled a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        footer#tempaltemo_footer .list-unstyled a:hover {
+            color: #28a745;
+        }
+        footer#tempaltemo_footer .border-light {
+            border-color: #ddd !important;
+        }
+        footer#tempaltemo_footer .footer-icons li a {
+            color: #6c757d;
+            border-color: #6c757d;
+            transition: all 0.2s ease-in-out;
+        }
+        footer#tempaltemo_footer .footer-icons li a:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+        footer#tempaltemo_footer .input-group .form-control {
+            border-color: #ced4da;
+        }
+        footer#tempaltemo_footer .input-group-text.btn-success {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+        }
+
+        /* Sección de copyright */
+        .w-100.bg-black.py-3 {
+            background-color: #343a40 !important;
+            color: #fff;
+        }
+        .w-100.bg-black.py-3 a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        .w-100.bg-black.py-3 a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para el mensaje de confirmación */
+        #purchase-confirmation-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            display: none; /* Hidden by default */
+            width: auto;
+            min-width: 300px;
+            text-align: center;
+            padding: 1.5rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white-pure navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="noreferrer"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://instagram.com/templatemo" target="_blank" rel="noreferrer"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/templatemo" target="_blank" rel="noreferrer"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://linkedin.com/templatemo" target="_blank" rel="noreferrer"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1" href="index.html">
+                <span>Zay</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <div class="d-lg-none flex-fill ">
+                        <form action="shop.html" method="get" class="d-flex mx-4 mb-2">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Buscar ...">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-fw fa-search"></i></button>
+                        </form>
+                    </div>
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="cart.html">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white" id="cart-quantity">0</span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-success text-white">+99</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 d-flex justify-content-between mt-3">
+                <form action="shop.html" method="get" class="modal-content modal-body border-0 p-0">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Buscar ...">
+                        <button type="submit" class="input-group-text bg-success text-white">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+                <a href="#" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="h2 pb-4 cart-section-title">Tu Carrito de Compras</h1>
+            </div>
+        </div>
+
+        <div id="purchase-confirmation-message" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa fa-check-circle me-2"></i> Su compra ha sido realizada con éxito. ¡Gracias por su pedido!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="h4 pb-3 border-bottom text-success">Productos en tu carrito</h3>
+                        <div class="table-responsive">
+                            <table class="table table-borderless align-middle" id="cart-items-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 100px;"></th>
+                                        <th scope="col">Producto</th>
+                                        <th scope="col" style="width: 120px;">Precio</th>
+                                        <th scope="col" class="text-center" style="width: 150px;">Cantidad</th>
+                                        <th scope="col" style="width: 120px;">Subtotal</th>
+                                        <th scope="col" style="width: 50px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                            <a href="shop.html" class="btn btn-outline-success btn-lg"><i class="fa fa-arrow-left mr-2"></i> Seguir comprando</a>
+                            <button class="btn btn-secondary btn-lg" id="clear-cart"><i class="fa fa-trash mr-2"></i> Vaciar carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm cart-summary">
+                    <div class="card-body">
+                        <h3 class="h4 pb-3 border-bottom text-success">Resumen del Pedido</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Subtotal de productos
+                                <span id="cart-subtotal" class="fw-bold">$0.00</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Envío
+                                <span id="cart-shipping" class="fw-bold">$0.00</span>
+                            </li>
+                            <li class="list-group-item fs-4 text-success fw-bold d-flex justify-content-between align-items-center">
+                                Total
+                                <span id="cart-total">$0.00</span>
+                            </li>
+                        </ul>
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-success btn-lg" type="button" id="proceed-to-checkout"><i class="fa fa-credit-card mr-2"></i> Proceder al Pago</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-white-pure" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light">Zay Shop</h2>
+                    <ul class="list-unstyled text-muted footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            123 Consectetur at ligula 10660
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none text-muted" href="tel:010-020-0340">010-020-0340</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none text-muted" href="mailto:info@company.com">info@company.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-dark border-bottom pb-3 border-light">Productos</h2>
+                    <ul class="list-unstyled text-muted footer-link-list">
+                        <li><a class="text-decoration-none text-muted" href="#">Lujo</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Deportivos</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Hombres</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Mujeres</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Populares</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Calzado deportivo</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-dark border-bottom pb-3 border-light">Información</h2>
+                    <ul class="list-unstyled text-muted footer-link-list">
+                        <li><a class="text-decoration-none text-muted" href="#">Inicio</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Nosotros</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Ubicaciones de la tienda</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Preguntas Frecuentes</a></li>
+                        <li><a class="text-decoration-none text-muted" href="#">Contacto</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-muted mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-muted text-decoration-none" target="_blank" rel="noreferrer" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-muted text-decoration-none" target="_blank" rel="noreferrer" href="https://instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-muted text-decoration-none" target="_blank" rel="noreferrer" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-muted text-decoration-none" target="_blank" rel="noreferrer" href="https://linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="subscribeEmail">Dirección de correo electrónico</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control border-light bg-white" id="subscribeEmail" placeholder="Dirección de correo electrónico">
+                        <div class="input-group-text btn-success text-white">Suscribir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 bg-light py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-muted">
+                            Copyright &copy; 2024 Zay Shop | Diseñado por <a rel="noreferrer" class="text-muted" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/Carrito de compras.js"></script>
+        $(document).ready(function() {
+            // Función para guardar el carrito en localStorage
+            function saveCart(cart) {
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            }
+
+            // Función para cargar el carrito de localStorage
+            function loadCart() {
+                return JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            }
+
+            // Función para actualizar los totales del carrito y guardar en localStorage
+            function updateCartTotals() {
+                let cart = loadCart();
+                let subtotal = 0;
+                let totalItemsInCart = 0;
+
+                $('#cart-items-table tbody').empty(); // Limpiar tabla antes de reconstruir
+
+                if (cart.length === 0) {
+                    $('#cart-items-table tbody').append('<tr><td colspan="6" class="text-center py-5">Tu carrito está vacío.</td></tr>');
+                } else {
+                    cart.forEach(item => {
+                        const itemSubtotal = item.price * item.quantity;
+                        subtotal += itemSubtotal;
+                        totalItemsInCart += item.quantity; // Sumar la cantidad de cada producto
+                        
+                        const rowHtml = `
+                            <tr class="cart-item" data-product-id="${item.id}">
+                                <td><img src="${item.image}" class="cart-item-img" alt="${item.name}"></td>
+                                <td>${item.name}</td>
+                                <td>$<span class="item-price">${item.price.toFixed(2)}</span></td>
+                                <td>
+                                    <div class="input-group quantity-control">
+                                        <button class="btn btn-sm btn-outline-secondary btn-minus" type="button">-</button>
+                                        <input type="text" class="form-control form-control-sm text-center item-quantity" value="${item.quantity}" min="1" readonly>
+                                        <button class="btn btn-sm btn-outline-secondary btn-plus" type="button">+</button>
+                                    </div>
+                                </td>
+                                <td>$<span class="item-subtotal">${itemSubtotal.toFixed(2)}</span></td>
+                                <td class="text-end"><button class="btn btn-sm btn-danger remove-item"><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                        `;
+                        $('#cart-items-table tbody').append(rowHtml);
+                    });
+                }
+
+                const shipping = subtotal > 0 ? 5.00 : 0.00; // Envío solo si hay productos
+                const total = subtotal + shipping;
+
+                $('#cart-subtotal').text('$' + subtotal.toFixed(2));
+                $('#cart-shipping').text('$' + shipping.toFixed(2));
+                $('#cart-total').text('$' + total.toFixed(2));
+                $('#cart-quantity').text(totalItemsInCart); // Actualizar el badge del carrito
+                
+                saveCart(cart); // Guardar los cambios en localStorage
+            }
+
+            // Función para añadir un producto al carrito
+            // Esta función se llamaría desde una página de productos (ej. shop.html)
+            // Ejemplo de uso: addToCart({ id: 'prod3', name: 'Zay Mochila', price: 30.00, image: './assets/img/product_single_03.jpg' });
+            window.addToCart = function(product) {
+                let cart = loadCart();
+                const existingItemIndex = cart.findIndex(item => item.id === product.id);
+
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                saveCart(cart);
+                updateCartTotals(); // Actualizar la vista del carrito
+                // Puedes mostrar un toast o mensaje pequeño aquí si lo deseas.
+                // alert('¡Producto añadido al carrito!'); // Notificación simple
+            }
+
+            // Manejar clic en botón de aumentar cantidad
+            $(document).on('click', '.btn-plus', function() {
+                const $row = $(this).closest('.cart-item');
+                const productId = $row.data('product-id');
+                let cart = loadCart();
+                const itemIndex = cart.findIndex(item => item.id === productId);
+
+                if (itemIndex > -1) {
+                    cart[itemIndex].quantity += 1;
+                    updateCartTotals();
+                }
+            });
+
+            // Manejar clic en botón de disminuir cantidad
+            $(document).on('click', '.btn-minus', function() {
+                const $row = $(this).closest('.cart-item');
+                const productId = $row.data('product-id');
+                let cart = loadCart();
+                const itemIndex = cart.findIndex(item => item.id === productId);
+
+                if (itemIndex > -1 && cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                    updateCartTotals();
+                }
+            });
+
+            // Manejar clic en botón de eliminar artículo
+            $(document).on('click', '.remove-item', function() {
+                const $row = $(this).closest('.cart-item');
+                const productId = $row.data('product-id');
+                let cart = loadCart();
+                
+                cart = cart.filter(item => item.id !== productId); // Filtrar el producto a eliminar
+
+                updateCartTotals(); // Actualizar la vista del carrito con los cambios
+            });
+
+            // Manejar clic en botón de vaciar carrito
+            $('#clear-cart').on('click', function() {
+                saveCart([]); // Guardar un carrito vacío
+                updateCartTotals(); // Actualizar la vista del carrito
+            });
+
+            // Manejar clic en el botón "Proceder al Pago"
+            $('#proceed-to-checkout').on('click', function() {
+                let cart = loadCart();
+                if (cart.length === 0) {
+                    alert('Tu carrito está vacío. Añade productos para proceder al pago.');
+                    return;
+                }
+
+                // Aquí simularías el proceso de pago
+                // Por ahora, vaciamos el carrito y mostramos el mensaje de confirmación
+                saveCart([]); // Vaciar el carrito
+                updateCartTotals(); // Actualizar la interfaz del carrito
+
+                const $confirmationMessage = $('#purchase-confirmation-message');
+                $confirmationMessage.fadeIn().delay(5000).fadeOut(); // Mostrar por 5 segundos y luego desvanecer
+            });
+
+            // Simular la adición de algunos productos para demostración si el carrito está vacío
+            // ESTO ES SOLO PARA PRUEBAS Y DEMOSTRACIÓN.
+            // En una aplicación real, los productos se añadirían desde la página de la tienda.
+            function addDemoProductsIfEmpty() {
+                let cart = loadCart();
+                if (cart.length === 0) {
+                    // Simular añadir dos productos iniciales
+                    cart.push({ id: 'prod1', name: 'Zapato Deportivo Zay Verde', price: 25.00, image: './assets/img/product_single_01.jpg', quantity: 1 });
+                    cart.push({ id: 'prod2', name: 'Accesorios Zay Clásicos', price: 10.00, image: './assets/img/product_single_02.jpg', quantity: 2 });
+                    saveCart(cart);
+                }
+            }
+            addDemoProductsIfEmpty(); // Llamar al cargar la página para tener productos de ejemplo
+
+            // Inicializar el carrito al cargar la página
+            updateCartTotals();
+        });
+    </script>
+</body>
+
+</html>
